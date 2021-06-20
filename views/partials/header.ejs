@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylesheets/style.css"/>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <div class="nav-wrapper-let">
+                <h1>Ghibli Gibberi</h1>
+                <img src="images/studioGhibli logo.png">
+                <ul>
+                    <li><a href="/">MAIN</a></li>
+                    <li><a href="/movies">MOVIES</a></li>
+                    <li><a href="/reviews">MY REVIEWS</a></li>
+                </ul>
+            </div>
+            <div class="nav-wrapper-right">
+                <ul>
+                    <li>
+                        <% if (user) { %>
+                            <a href="/logout">LOG OUT</a>
+                        <% } else { %> 
+                            <a href="/auth/google">LOG IN WITH GOOGLE</a>
+                        <% } %> 
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <main>

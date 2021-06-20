@@ -5,8 +5,16 @@ const passport = require('passport');
 router.get('/', function(req, res) {
   // Where do you want to go for the root route
   // in the student demo this was res.redirect('/students'), what do you want?
+  res.render('movies/index');
 });
 
+router.get('/movies', function(req, res){
+  res.render('movies/movies');
+});
+
+router.get('/reviews', function(req, res){
+  res.render('movies/reviews');
+})
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
   'google',
