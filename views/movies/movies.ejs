@@ -3,9 +3,11 @@
 <h1>This will be the movies page!</h1>
 <ul>
     <% movies.forEach(movie => { %>
-        <li><%= movie.title %>  (<%= movie.release_date %>)</li>
+        <li><a href="<%= movie._id %>"><%= movie.title %></a>  (<%= movie.release_date %>)
+        </li>
     <% }) %>
 </ul>
+
 
 <a href="/movies/show-list">Please click this link if you don't see list of movies</a>
 

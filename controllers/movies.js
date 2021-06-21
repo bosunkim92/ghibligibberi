@@ -38,6 +38,6 @@ function create(req, res){
             console.log('error has occured while loading ghibli API');
         }
     })
-    res.redirect('movies/movies');
+    res.redirect('/movies');
 }
 
