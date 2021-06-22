@@ -3,7 +3,7 @@
 <h1>This will be the movies page!</h1>
 <ul>
     <% movies.forEach(movie => { %>
-        <li><a href="<%= movie._id %>"><%= movie.title %></a>  (<%= movie.release_date %>)
+        <li><a href="/movies/<%= movie._id %>"><%= movie.title %></a>  (<%= movie.release_date %>)
         </li>
     <% }) %>
 </ul>

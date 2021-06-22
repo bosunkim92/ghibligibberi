@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 module.exports = {
     index,
-    create
+    create,
+    show
 }
 
 const rootURL = 'https://ghibliapi.herokuapp.com';
@@ -38,6 +39,13 @@ function create(req, res){
             console.log('error has occured while loading ghibli API');
         }
     })
-    res.redirect('/movies');
+    res.redirect('back');
 }
 
+function show(req, res){
+    Movie.findById(req.params.id, function(err, movie){
+        console.log(movie);
+        res.render('movies/show', {movie});
+
+    });
+}
