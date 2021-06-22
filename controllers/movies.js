@@ -22,19 +22,14 @@ function create(req, res){
         let data = JSON.parse(body);
         if(!error && (response.statusCode >= 200 && response.statusCode < 400)){
             data.forEach(movie => {
-
                 const movieData = new Movie(movie);
-
-                    movieData.save(function(err){
+                movieData.save(function(err){
                     if(err){
                         console.log(err);
                         return;
                     };
-                    console.log(movieData);
-                    // res.redirect('movies/movies');
                 })
             });
-
         } else {
             console.log('error has occured while loading ghibli API');
         }
@@ -46,6 +41,5 @@ function show(req, res){
     Movie.findById(req.params.id, function(err, movie){
         console.log(movie);
         res.render('movies/show', {movie});
-
     });
 }

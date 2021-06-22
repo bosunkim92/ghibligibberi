@@ -2,8 +2,22 @@ const Movie = require('../models/movie');
 
 module.exports = {
   create,
-  new: newReview
+  new: newReview,
+  index
 };
+
+function index(req, res){
+    Movie.findOne(req.params.id, function(err, review){
+        console.log("\n\n")
+        console.log(req);
+        console.log("\n\n")
+        console.log(req.params.id);
+        console.log("\n\n")
+    
+        res.render('movies/reviews', {review});
+
+    })
+}
 
 function create(req, res) {
     req.body.author = {

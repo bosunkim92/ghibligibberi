@@ -5,8 +5,10 @@
 <h2>Reviews</h2>
 <form id="add-review-form" method="POST" action="/movies/<%= movie._id %>/reviews">
   <fieldset>
-    <label>Review:</label>
-    <textarea name="content"></textarea>
+    <label>Title:</label>
+    <input type="text" name="content_title" placeholder="Title">
+    <label>Content:</label>
+    <textarea name="content" placeholder="Please write your review here!"></textarea>
     <label>Rating:</label>
     <select name="rating">
       <option value="1">1</option>

@@ -8,11 +8,6 @@ router.get('/', function(req, res) {
   res.render('movies/index');
 });
 
-
-
-router.get('/reviews', function(req, res){
-  res.render('movies/reviews');
-})
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
   'google',
