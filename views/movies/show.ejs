@@ -24,7 +24,7 @@
           <% total += r.rating %>
           <tr>
             <td><%= r.author.name %></td>
-            <td><a href="/reviews/<%= r._id %>"><%= r.content_title %></a></td>
+            <td><a href="/movies/<%= r.movieId %>/reviews/<%= r._id %>"><%= r.content_title %></a></td>
             <td><%= r.content %></td>
             <td><%= r.rating %></td>
             <td><%= r.createdAt.toLocaleDateString() %></td>
@@ -40,6 +40,6 @@
     <h5>No Reviews Yet</h5>
   <% } %>
 
-<button type="button"><a href="/movies/<%= movie._id %>/new_review">Add Review</a></button>
+<button type="button"><a href="/movies/<%= movie._id %>/reviews">Add Review</a></button>
 
 <%- include('../partials/footer') %>

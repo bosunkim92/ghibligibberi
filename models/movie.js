@@ -7,10 +7,11 @@ const reviewSchema = new Schema({
         name: String,
         googleId: String
     },
+    movieId: String,
     content_title: String,
     content: String,
     rating: {type: Number, min: 1, max: 5, default: 5},
-    // comments: [commentsSchema]
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
   }, {
     timestamps: true
 });

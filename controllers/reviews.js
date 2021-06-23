@@ -3,19 +3,39 @@ const Movie = require('../models/movie');
 module.exports = {
   create,
   new: newReview,
-  index
+  index,
+  update,
+  delete: deleteReview
 };
 
-function index(req, res){
-    Movie.findOne(req.params.id, function(err, review){
-        console.log("\n\n")
-        console.log(req);
-        console.log("\n\n")
-        console.log(req.params.id);
-        console.log("\n\n")
-    
-        res.render('movies/reviews', {review});
+function deleteReview(req, res) {
+    Movie.findOne({reviews: { $elemMatch: {_id: req.params.id}}}, function (err, movie){
+        const review = movie.reviews.id(req.params.id);
+        if(typeof req.user === 'undefined' || !review.author._id === req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
+        movie.reviews.pull(req.params.id);
+        movie.save(function(err){
+            res.redirect(`/movies/${movie._id}`);    
+        })
+    })
+}
 
+function update(req, res){
+    Movie.findOne({reviews: { $elemMatch: {_id: req.params.id}}}, function (err, movie){
+        const review = movie.reviews.id(req.params.id);
+        if(typeof req.user === 'undefined' || !review.author._id === req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
+        review.content_title = req.body.content_title;
+        review.content = req.body.content;
+        review.rating = req.body.rating;
+        movie.save(function(err) {
+            res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
+        })
+    })
+}
+
+function index(req, res){
+    Movie.findOne({reviews: { $elemMatch: {_id: req.params.id}}}, function (err, movie){
+        const review = movie.reviews.id(req.params.id);
+        res.render('movies/reviews', {review, movie});
     })
 }
 
@@ -25,7 +45,7 @@ function create(req, res) {
         name: req.user.name,
         googleId: req.user.googleId
     }
-    
+    req.body.movieId = req.params.id;
     Movie.findById(req.params.id, function(err, movie) {
         movie.reviews.push(req.body);
         movie.save(function(err) {
