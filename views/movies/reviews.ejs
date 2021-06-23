@@ -3,8 +3,29 @@
     <h1>And This will be reviews page!</h1>
     <ul>
         <li>Review title: <%= review.content_title %>  &emsp;<span>created: <%= review.createdAt %></span></li>
+            <p>author: <%= review.author.name %> </p>
             <p>content: <%= review.content %></p>
-            <p>comments: <%= review.comments %></p>
+            <fieldset>
+                <ul>
+                    <% (review.comments).forEach(comment => { %>
+                        <li><%= comment.author.name %>: <%= comment.content %> 
+                            <div class="update_deleteBtns">
+                                <button onclick="toggle()"> Edit </button>
+                                    <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="edit-form" style="display:none">
+                                        <fieldset>
+                                            <label>Content:</label>
+                                            <textarea name="content" placeholder="Edit your comment"></textarea>
+                                            <input type="submit" value="Add Review">
+                                        </fieldset>
+                                    </form>
+                                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=DELETE" class="delete-form" method="POST">
+                                    <button type="submit">delete</button>
+                                </form> 
+                            </div>
+                        </li>                     
+                    <% }) %>
+                </ul>
+            </fieldset>
             <div class="comment-div">
                 <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments" method="POST">
                     <fieldset>

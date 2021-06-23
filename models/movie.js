@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const commentSchema = new Schema({
+    author: {
+        _id: String,
+        name: String,
+        googleId: String
+    },
+    reviewId: String,
+    content: String,
+}, {
+    timestamps: true
+})
+
 const reviewSchema = new Schema({
     author: {
         _id: String,
@@ -11,7 +23,7 @@ const reviewSchema = new Schema({
     content_title: String,
     content: String,
     rating: {type: Number, min: 1, max: 5, default: 5},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+    comments: [commentSchema]
   }, {
     timestamps: true
 });
