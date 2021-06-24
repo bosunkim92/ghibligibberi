@@ -10,15 +10,15 @@
                     <% (review.comments).forEach(comment => { %>
                         <li><%= comment.author.name %>: <%= comment.content %> 
                             <div class="update_deleteBtns">
-                                <button onclick="toggle()"> Edit </button>
-                                    <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="edit-form" style="display:none">
+                                <button onclick="toggle_comment()"> Edit </button>
+                                    <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="edit-form-comment" style="display:none">
                                         <fieldset>
                                             <label>Content:</label>
                                             <textarea name="content" placeholder="Edit your comment"></textarea>
                                             <input type="submit" value="Add Review">
                                         </fieldset>
                                     </form>
-                                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=DELETE" class="delete-form" method="POST">
+                                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=DELETE" class="delete-form-comment" method="POST">
                                     <button type="submit">delete</button>
                                 </form> 
                             </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="update_deleteBtns">
-                <button onclick="toggle()"> Edit </button>
+                <button onclick="toggle_review()"> Edit </button>
                     <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=PUT" method="POST" id="edit-form" style="display:none">
                         <fieldset>
                             <label>Title:</label>

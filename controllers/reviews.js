@@ -11,7 +11,7 @@ module.exports = {
 function deleteReview(req, res) {
     Movie.findOne({reviews: { $elemMatch: {_id: req.params.id}}}, function (err, movie){
         const review = movie.reviews.id(req.params.id);
-        if(typeof req.user === 'undefined' || !review.author._id === req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
+        if(typeof req.user === 'undefined' || review.author._id != req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
         movie.reviews.pull(req.params.id);
         movie.save(function(err){
             res.redirect(`/movies/${movie._id}`);    
@@ -22,7 +22,7 @@ function deleteReview(req, res) {
 function update(req, res){
     Movie.findOne({reviews: { $elemMatch: {_id: req.params.id}}}, function (err, movie){
         const review = movie.reviews.id(req.params.id);
-        if(typeof req.user === 'undefined' || !review.author._id === req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
+        if(typeof req.user === 'undefined' || review.author._id != req.user._id) return res.redirect(`/movies/${movie._id}/reviews/${review._id}`);
         review.content_title = req.body.content_title;
         review.content = req.body.content;
         review.rating = req.body.rating;
