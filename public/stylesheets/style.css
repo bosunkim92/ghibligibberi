@@ -1,20 +1,31 @@
-.brand-logo {
-  margin-left: 15px;
+body {
+  background: url('/images/background.jpeg');
+  text-align: center;
+}
+.logo {
+  display: inline-flex;
 }
 
-.card .card-content .card-title {
-  margin-bottom: 10px;
+nav {
+  display: flex;
 }
 
-#search-row form {
-  padding-top: 20px;
+.nav-wrapper-left {
+  position: absolute;
+}
+.nav-wrapper-left li{
+  left: 50px;
+  display: inline-flex;
+  padding-right: 10px;
+  list-style: none;
 }
 
-.student-name {
-  position: relative;
-  top: -5px;
+.nav-wrapper-right{
+  position: absolute;
+  right: 50px;
 }
-
-.collection-item form {
-  margin-top: -5px;
+@media screen and (max-width: 510px){ 
+  .nav-wrapper-left + .nav-wrapper-right {
+    margin-top: 18px;
+  }
 }
