@@ -1,6 +1,5 @@
 let request = require('request');
 const Movie = require('../models/movie');
-const mongoose = require('mongoose');
 
 module.exports = {
     index,

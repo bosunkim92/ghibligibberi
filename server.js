@@ -22,6 +22,7 @@ const indexRouter = require('./routes/index');
 const moviesRouter = require('./routes/movies');
 const reviewsRouter = require('./routes/reviews');
 const commentsRouter = require('./routes/comments');
+const myActivitiesRouter = require('./routes/myActivities');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,6 +57,7 @@ app.use('/', indexRouter);
 app.use('/movies', moviesRouter);
 moviesRouter.use('/:id/reviews', reviewsRouter);
 app.use('/movies/:id/reviews/:id', commentsRouter);
+app.use('/', myActivitiesRouter);
 
 // app.use('/movies/:id/reviews', reviewsRouter);
 

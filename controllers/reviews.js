@@ -40,6 +40,7 @@ function index(req, res){
 }
 
 function create(req, res) {
+    if(req.body.content_title == "" || req.body.content == "") return res.redirect(`/movies/${req.params.id}`);
     req.body.author = {
         _id: req.user._id,
         name: req.user.name,

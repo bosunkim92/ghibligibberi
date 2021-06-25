@@ -1,68 +1,79 @@
 <%- include('../partials/header') %>
 
-    <h1>And This will be reviews page!</h1>
-    <ul>
-        <li>Review title: <%= review.content_title %>  &emsp;<span>created: <%= review.createdAt %></span></li>
-            <p>author: <%= review.author.name %> </p>
-            <p>content: <%= review.content %></p>
-            <fieldset>
-                <ul>
-                    <% (review.comments).forEach(comment => { %>
+    <div class="review-detail">
+        <h1><%= movie.title %></h1>
+        <h3>Review title: <%= review.content_title %></h3>
+        <h4>created: <%= review.createdAt %></h4>
+        <p>author: <%= review.author.name %> </p>
+        <p>content: <%= review.content %></p>
+        <div class="update_deleteBtns">
+            <div class="updateBtn">
+                <button onclick="toggle_review()"> Edit </button>
+            </div>
+                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=PUT" method="POST" id="edit-form" style="display:none">
+                    <fieldset>
+                        <label>Title:</label>
+                        <input type="text" name="content_title" placeholder="Title">
+                        <label>Content:</label>
+                        <textarea name="content" placeholder="Edit your review"></textarea>
+                        <label>Rating:</label>
+                        <select name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
+                        <input type="submit" value="Add Review">
+                    
+                    </fieldset>
+                </form>
+    
+            <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=DELETE" class="delete-form" method="POST">
+                <button type="submit">delete</button>
+            </form> 
+        </div>
+    </div>
+
+    <div class="comment-area">
+        <fieldset>
+            <ul>
+                <% if (review.comments == "") {%>
+                    <p>No Comments Yet</p>
+                <% } else { %>   
+                <% (review.comments).forEach(comment => { %>
+                    <div class="comment-line">
                         <li><%= comment.author.name %>: <%= comment.content %> 
-                            <div class="update_deleteBtns">
-                                <button onclick="toggle_comment()"> Edit </button>
-                                    <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="edit-form-comment" style="display:none">
-                                        <fieldset>
-                                            <label>Content:</label>
-                                            <textarea name="content" placeholder="Edit your comment"></textarea>
-                                            <input type="submit" value="Add Review">
-                                        </fieldset>
-                                    </form>
-                                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=DELETE" class="delete-form-comment" method="POST">
-                                    <button type="submit">delete</button>
-                                </form> 
-                            </div>
                         </li>                     
-                    <% }) %>
-                </ul>
-            </fieldset>
+                        <div class="update_deleteBtns">
+                            <div class="updateBtn">
+                                <button onclick="toggle_comment()"> Edit </button>
+                            </div>
+                                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id="edit-form-comment" style="display:none">
+                                    <fieldset>
+                                        <label>Content:</label>
+                                        <textarea name="content" placeholder="Edit your comment"></textarea>
+                                        <input type="submit" value="Add Review">
+                                    </fieldset>
+                                </form>
+                            <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments/<%= comment._id %>?_method=DELETE" class="delete-form-comment" method="POST">
+                                <button type="submit">delete</button>
+                            </form> 
+                        </div>
+                    </div>
+                <% }) %>
+                <% } %> 
+            </ul>
             <div class="comment-div">
                 <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>/comments" method="POST">
-                    <fieldset>
                         <label>Leave Commnets to the Reviewer!</label>
                         <input type="text" name="content">
                         <input type="submit" value="Add Comment">
-                    </fieldset>
                 </form>
             </div>
+        </fieldset>
+    </div>
 
-            <div class="update_deleteBtns">
-                <button onclick="toggle_review()"> Edit </button>
-                    <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=PUT" method="POST" id="edit-form" style="display:none">
-                        <fieldset>
-                            <label>Title:</label>
-                            <input type="text" name="content_title" placeholder="Title">
-                            <label>Content:</label>
-                            <textarea name="content" placeholder="Edit your review"></textarea>
-                            <label>Rating:</label>
-                            <select name="rating">
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                            </select>
-                            <input type="submit" value="Add Review">
-                        
-                          </fieldset>
-                    </form>
-    
-                <form action="/movies/<%= movie._id %>/reviews/<%= review._id %>?_method=DELETE" class="delete-form" method="POST">
-                    <button type="submit">delete</button>
-                </form> 
 
-            </div>
-
-    </ul>
 
 <%- include('../partials/footer') %>

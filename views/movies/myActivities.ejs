@@ -1,0 +1,47 @@
+<%- include('../partials/header') %>
+
+    <div>
+        <div class="reviews-list">
+            <h3>My Reviews:</h3>
+            <% movies.forEach(movie => { %>
+                <% if(movie.reviews != "") { %> 
+                    <% (movie.reviews).forEach(review => { %>
+                        <% if(review.author._id == user._id) {%> 
+                            <p>
+                                <a href="/movies/<%= review.movieId %>/reviews/<%= review._id %> ">
+                                    <%= review.content_title %>
+                                </a>
+                                <span><%= review.createdAt %></span> 
+                            </p>
+                        <% } %>  
+                    <% }) %>
+                <% } %> 
+            <% }) %>
+        </div>
+        <div class="comments-list">
+            <h3>My Comments:</h3>
+            <% movies.forEach(movie => { %>
+                <% if(movie.reviews != "") { %> 
+                    <% (movie.reviews).forEach(review => { %>
+                        <% if(review.comments != "") {%> 
+                        <% (review.comments).forEach(comment => { %>
+                            <% if(comment.author._id == user._id) {%>
+                                <p>
+                                    <a href="/movies/<%= review.movieId %>/reviews/<%= review._id %> ">
+                                        <%= comment.content %>
+                                    </a>
+                                    <span><%= comment.createdAt %></span> 
+                                </p>
+                            <% } %> 
+                        <% }) %>
+                        <% } %>  
+                    <% }) %>
+                <% } %> 
+            <% }) %>
+        </div>
+    </div>
+
+
+
+
+<%- include('../partials/footer') %>

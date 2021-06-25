@@ -1,45 +1,48 @@
 <%- include('../partials/header') %>
 
 
-<h1><%= movie.title %>&emsp;<%= movie.release_date %></h1>
-<h3>Director:<%= movie.director %>&emsp;Producer:<%= movie.producer %>&emsp;<span>Running Time: <%= movie.running_time %></span></h3>
-<h5>Original Title: <%= movie.original_title %> (<%= movie.original_title_romanised %>)</h5>
-<p><%= movie.description %></p>
+    <div class="movie-detail">
+        <h1><%= movie.title %>&emsp;<%= movie.release_date %></h1>
+        <h3>Director: <%= movie.director %>&emsp;Producer: <%= movie.producer %>&emsp;<span>Running Time: <%= movie.running_time %></span></h3>
+        <h5>Original Title: <%= movie.original_title %> (<%= movie.original_title_romanised %>)</h5>
+        <p><%= movie.description %></p>
+    </div>
+    
+    <div class="movie-review">
+        <% if (movie.reviews.length) { %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Author</th>
+                  <th>Title</th>
+                  <th>Review</th>
+                  <th>Rating</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% let total = 0 %>
+                <% movie.reviews.forEach(function(r) { %>
+                  <% total += r.rating %>
+                  <tr>
+                    <td><%= r.author.name %></td>
+                    <td><a href="/movies/<%= r.movieId %>/reviews/<%= r._id %>"><%= r.content_title %></a></td>
+                    <td><%= r.content %></td>
+                    <td><%= r.rating %></td>
+                    <td><%= r.createdAt.toLocaleDateString() %></td>
+                </tr>
+                <% }); %>
+                <tr>
+                  <td colspan="4"></td>
+                  <td><strong><%= (total / movie.reviews.length).toFixed(1) %></strong></td>
+                </tr>
+              </tbody>
+            </table>
+          <% } else { %>
+            <h5>No Reviews Yet</h5>
+          <% } %>
+        <button type="button"><a href="/movies/<%= movie._id %>/reviews">Add Review</a></button>
+    </div>
 
-
-<% if (movie.reviews.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Author</th>
-          <th>Title</th>
-          <th>Review</th>
-          <th>Rating</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let total = 0 %>
-        <% movie.reviews.forEach(function(r) { %>
-          <% total += r.rating %>
-          <tr>
-            <td><%= r.author.name %></td>
-            <td><a href="/movies/<%= r.movieId %>/reviews/<%= r._id %>"><%= r.content_title %></a></td>
-            <td><%= r.content %></td>
-            <td><%= r.rating %></td>
-            <td><%= r.createdAt.toLocaleDateString() %></td>
-          </tr>
-        <% }); %>
-        <tr>
-          <td colspan="4"></td>
-          <td><strong><%= (total / movie.reviews.length).toFixed(1) %></strong></td>
-        </tr>
-      </tbody>
-    </table>
-  <% } else { %>
-    <h5>No Reviews Yet</h5>
-  <% } %>
-
-<button type="button"><a href="/movies/<%= movie._id %>/reviews">Add Review</a></button>
 
 <%- include('../partials/footer') %>

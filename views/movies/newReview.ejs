@@ -1,26 +1,35 @@
 <%- include('../partials/header') %>
 
 
-<h1>Add your review!</h1>
-<h2>Reviews</h2>
-<form id="add-review-form" method="POST" action="/movies/<%= movie._id %>/reviews">
-  <fieldset>
-    <label>Title:</label>
-    <input type="text" name="content_title" placeholder="Title">
-    <label>Content:</label>
-    <textarea name="content" placeholder="Please write your review here!"></textarea>
-    <label>Rating:</label>
-    <select name="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-    <input type="submit" value="Add Review">
+    <div class="new-review-form">
+        <form id="add-review-form" method="POST" action="/movies/<%= movie._id %>/reviews">
+            <fieldset>
+                <h2>Add Reviews</h2>
+                <div class="input-area-line">
+                    <label>Title:</label>
+                    <input class="input-area" type="text" name="content_title" placeholder="Title">
+                </div>
+                <div class="input-area-line">
+                    <label>Content:</label>
+                    <textarea class="text-area" name="content" placeholder="Please write your review here!"></textarea>
+                </div>
+                <div class="input-area-line">
+                    <label>Rating:</label>
+                    <select name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="input-area-line" id="new-form-button">
+                    <button type="submit">Add Review</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
-  </fieldset>
-</form>
 
 
 <%- include('../partials/footer') %>

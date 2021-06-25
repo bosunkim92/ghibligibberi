@@ -1,14 +1,19 @@
 <%- include('../partials/header') %>
 
-<h1>This will be the movies page!</h1>
-<ul>
-    <% movies.forEach(movie => { %>
-        <li><a href="/movies/<%= movie._id %>"><%= movie.title %></a>  (<%= movie.release_date %>)
-        </li>
-    <% }) %>
-</ul>
+    <div class="movie-container">
+        <% movies.forEach(movie => { %>
+            <div class="movie-card">
+                <ul>
+                    <li><a href="/movies/<%= movie._id %>"><%= movie.title %></a>  (<%= movie.release_date %>)
+                    </li>
+                </ul>
+            </div>
+        <% }) %>
+
+    </div>
 
 
+<% if (typeof movies == "undefined") {%> 
 <a href="/movies/show-list">Please click this link if you don't see list of movies</a>
-
+<% } %> 
 <%- include('../partials/footer') %>
